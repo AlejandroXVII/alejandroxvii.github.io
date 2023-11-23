@@ -20,7 +20,6 @@ function structureString(string) {
     }
     return arr;
 }
-
 function solveEquation(string){
     arr = structureString(string);
     let result = 0; 
@@ -56,5 +55,24 @@ function solveEquation(string){
     }
     return arr[0];
 }
+const screen = document.querySelector('#screenInOut');
+function addInput(){
+    if (screen.textContent != 0)
+        screen.textContent = screen.textContent + this.textContent;
+    else
+        screen.textContent = this.textContent;  
+}
+function showResult(){
+    let equation = screen.textContent;
+    let result = solveEquation(equation);
+    screen.textContent = result; 
+}
 
-console.log(solveEquation('5.5+3+15.3-2+10-5-10'))
+let btn = document.querySelectorAll('.press');
+for (const b of btn) {
+    b.addEventListener('click',addInput);
+}
+
+let equal = document.querySelector('#equal');
+equal.addEventListener('click',showResult);
+
