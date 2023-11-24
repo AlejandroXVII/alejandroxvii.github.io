@@ -30,8 +30,9 @@ body {
     width: 260px;
     border-radius: 30px;
     display: flex;
+    flex-flow: column;
     align-content: center;
-    justify-content: end;
+    justify-content: center;
   }
   #buttonsBox {
     display: flex;
@@ -63,6 +64,12 @@ body {
   p {
     display: flex;
     align-content: center;
-    margin: 15px;
+    margin: 0 20px;
+    font-size: 25px;
+    justify-content: end;
+    color: rgb(92, 92, 92);
+  }
+  #screenResult {
     font-size: 30px;
+    color: black;
   }

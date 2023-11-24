@@ -56,16 +56,30 @@ function solveEquation(string){
     return arr[0];
 }
 const screen = document.querySelector('#screenInOut');
+const screenResult = document.querySelector('#screenResult');
 function addInput(){
-    if (screen.textContent != 0)
+    if ((screen.textContent != 0)&(screen.textContent != 'NaN')&(screen.textContent != 'ERROR'))
         screen.textContent = screen.textContent + this.textContent;
     else
         screen.textContent = this.textContent;  
 }
+function showOnlyTwoNumbersAtTheSameTime(){
+    let equation = screen.textContent;
+    let arrEquation = structureString(equation);
+    if (arrEquation.length>3){
+        let symbol = arrEquation.pop();
+        console.log(arrEquation);
+        let result=solveEquation(arrEquation.join(''));
+        console.log(result);
+        screenResult.textContent = result; 
+        screen.textContent = result+symbol; 
+    }
+}
 function showResult(){
     let equation = screen.textContent;
     let result = solveEquation(equation);
-    screen.textContent = result; 
+    //screen.textContent = result; 
+    screenResult.textContent = result; 
 }
 
 let btn = document.querySelectorAll('.press');
@@ -73,6 +87,11 @@ for (const b of btn) {
     b.addEventListener('click',addInput);
 }
 
+let symbols= document.querySelectorAll('.symbol');
+for (const b of btn) {
+    b.addEventListener('click',addInput);
+    b.addEventListener('click',showOnlyTwoNumbersAtTheSameTime);
+}
+
 let equal = document.querySelector('#equal');
 equal.addEventListener('click',showResult);
-
