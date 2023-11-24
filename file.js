@@ -6,6 +6,10 @@ function toCompare (element) {
 }
 function structureString(string) { 
     let arr = string.split('');
+    if(arr[0]=='-'){
+        arr[0] = [arr[0]+arr[1]].toString();
+        arr.splice(1,1);
+    }
     for (let index = 0; index < arr.length-1; index++) {
         if(toCompare(arr[index])&toCompare(arr[index+1])){
             arr[index] = [arr[index]+arr[index+1]].toString();
@@ -66,14 +70,26 @@ function addInput(){
 function showOnlyTwoNumbersAtTheSameTime(){
     let equation = screen.textContent;
     let arrEquation = structureString(equation);
-    if (arrEquation.length>3){
+    if (arrEquation.length>3 & typeof(arrEquation[2])=='number'){
         let symbol = arrEquation.pop();
-        console.log(arrEquation);
         let result=solveEquation(arrEquation.join(''));
-        console.log(result);
         screenResult.textContent = result; 
         screen.textContent = result+symbol; 
+    } 
+    if ((arrEquation[2]==='+')|(arrEquation[2]==='*')|(arrEquation[2]==='/')|(arrEquation[2]==='-')){
+        let symbol = arrEquation.pop();
+        arrEquation.pop();
+        let result=arrEquation.join('');
+        screen.textContent = result + symbol; 
     }
+    if ((arrEquation[0]==='+')|(arrEquation[0]==='*')|(arrEquation[0]==='/')){
+        screen.textContent = 0; 
+    }
+    if (screenResult.textContent === 'ERROR'){
+        screen.textContent = 0; 
+        screenResult.textContent = 0;
+    }
+
 }
 function showResult(){
     let equation = screen.textContent;
@@ -95,3 +111,9 @@ for (const b of btn) {
 
 let equal = document.querySelector('#equal');
 equal.addEventListener('click',showResult);
+
+let clean = document.querySelector('#clean');
+clean.addEventListener('click', () => {
+    screen.textContent = 0; 
+    screenResult.textContent = 0; 
+});
