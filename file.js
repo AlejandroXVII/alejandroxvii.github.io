@@ -94,7 +94,6 @@ function showOnlyTwoNumbersAtTheSameTime(){
 function showResult(){
     let equation = screen.textContent;
     let result = solveEquation(equation);
-    //screen.textContent = result; 
     screenResult.textContent = result; 
 }
 
